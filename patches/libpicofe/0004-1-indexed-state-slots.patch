@@ -1,0 +1,22 @@
+diff --git a/menu.c b/menu.c
+index e91f84a..e19902e 100644
+--- a/menu.c
++++ b/menu.c
+@@ -1203,7 +1203,7 @@ rescan:
+ 
+ // ------------ savestate loader ------------
+ 
+-#define STATE_SLOT_COUNT 10
++#define STATE_SLOT_COUNT 9
+ 
+ static int state_slot_flags = 0;
+ static int state_slot_times[STATE_SLOT_COUNT];
+@@ -1263,7 +1263,7 @@ static void draw_savestate_menu(int menu_sel, int is_loading)
+ 			}
+ 		}
+ 
+-		text_out16(x, y, "SLOT %i (%s)", i, time_buf);
++		text_out16(x, y, "SLOT %i (%s)", i+1, time_buf);
+ 	}
+ 	text_out16(x, y, "back");
+ 

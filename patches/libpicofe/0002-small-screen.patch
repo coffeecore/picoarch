@@ -1,0 +1,13 @@
+diff --git a/menu.c b/menu.c
+index e91f84a..3c98f1f 100644
+--- a/menu.c
++++ b/menu.c
+@@ -518,7 +518,7 @@ static void me_draw(const menu_entry *entries, int sel, void (*draw_more)(void))
+ {
+ 	const menu_entry *ent, *ent_sel = entries;
+ 	int x, y, w = 0, h = 0;
+-	int offs, col2_offs = 27 * me_mfont_w;
++	int offs, col2_offs = (g_menuscreen_w >= 320 ? 27 : 0) * me_mfont_w;
+ 	int vi_sel_ln = 0;
+ 	const char *name;
+ 	int i, n;
