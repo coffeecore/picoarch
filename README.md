@@ -148,3 +148,11 @@ picoarch keeps the running core name in a global variable. This is used to overr
 - Rename buttons to match the core's system
 - Reference frameskip core options to make fast-forward faster
 - Display extra options or hide unnecessary options
+
+
+## Git submodules commit
+
+```
+libpicofe @ 76e45c3
+libretro-common @ 8825288
+```
