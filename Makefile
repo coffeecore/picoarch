@@ -21,7 +21,7 @@ LDFLAGS    = -lc -ldl -lgcc -lm -lSDL -lasound -lpng -lz -Wl,--gc-sections -flto
 # Unpolished or slow cores that build
 # EXTRA_CORES += mame2003_plus prboom scummvm tyrquake
 
-CORES = beetle-pce-fast bluemsx fceumm fmsx gambatte gme gpsp mame2000 mednafen_ngp mednafen_wswan pcsx_rearmed picodrive pokemini quicknes smsplus-gx snes9x2002 snes9x2005 stella2014 $(EXTRA_CORES)
+CORES = beetle-pce-fast bluemsx fceumm fmsx gambatte gme gpsp handy mame2000 mednafen_ngp mednafen_wswan pcsx_rearmed picodrive pokemini quicknes smsplus-gx snes9x2002 snes9x2005 stella2014 $(EXTRA_CORES)
 
 ifneq ($(platform), trimui)
 CORES := $(CORES) dosbox-pure fake-08 fbalpha2012 snes9x2005_plus snes9x2010
@@ -68,6 +68,10 @@ gambatte_TYPES = gb,gbc,dmg,zip
 gme_REPO = https://github.com/libretro/libretro-gme
 
 gpsp_TYPES = gba,bin,zip
+
+handy_REPO = https://github.com/libretro/libretro-handy
+handy_REVISION = bc55d462f0b2d6b073ea93dc552ebd73cec60fd1
+handy_TYPES = lnx,lyx,o
 
 mame2000_REPO = https://github.com/libretro/mame2000-libretro
 mame2000_TYPES = zip

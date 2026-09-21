@@ -1,0 +1,20 @@
+diff --git a/Makefile b/Makefile
+index 088c344..4690e23 100644
+--- a/Makefile
++++ b/Makefile
+@@ -269,6 +269,15 @@ else ifeq ($(platform), gcw0)
+     fpic := -fPIC
+     SHARED := -shared -Wl,--no-undefined -Wl,-version-script=$(LIBRETRO_DIR)/link.T
+     FLAGS += -DDINGUX -fomit-frame-pointer -ffast-math -march=armv5te -mtune=arm926ej-s
++# TRIMUI
++else ifeq ($(platform), trimui)
++    TARGET := $(TARGET_NAME)_libretro.so
++    CC = $(CROSS_COMPILE)gcc
++    CXX = $(CROSS_COMPILE)g++
++    AR = $(CROSS_COMPILE)ar
++    fpic := -fPIC
++    SHARED := -shared -Wl,--no-undefined -Wl,-version-script=$(LIBRETRO_DIR)/link.T
++    FLAGS += -DDINGUX -fomit-frame-pointer -ffast-math -march=armv5te -mtune=arm926ej-s
+ 
+ # Nintendo Switch (libnx)
+ else ifeq ($(platform), libnx)
