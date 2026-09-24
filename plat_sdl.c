@@ -8,6 +8,8 @@
 #include "plat.h"
 #include "scale.h"
 #include "util.h"
+#include <stdio.h>
+#include <string.h>
 
 static SDL_Surface* screen;
 
@@ -218,6 +220,99 @@ void plat_video_menu_leave(void)
 
 void plat_video_open(void)
 {
+}
+
+void plat_video_progress(const char *label, unsigned percent)
+{
+	SDL_Rect outer;
+	SDL_Rect inner;
+	SDL_Rect fill;
+	uint32_t black;
+	uint32_t white;
+	uint32_t gray;
+	char percent_text[16];
+	int pitch;
+	int label_x;
+	int percent_x;
+
+	if (!screen)
+		return;
+
+	if (percent > 100)
+		percent = 100;
+
+	black = SDL_MapRGB(screen->format, 0, 0, 0);
+	white = SDL_MapRGB(screen->format, 255, 255, 255);
+	gray = SDL_MapRGB(screen->format, 80, 80, 80);
+
+	SDL_FillRect(screen, NULL, black);
+
+	outer.w = 204;
+	outer.h = 12;
+	outer.x = (screen->w - outer.w) / 2;
+	outer.y = (screen->h - outer.h) / 2;
+
+	inner.x = outer.x + 2;
+	inner.y = outer.y + 2;
+	inner.w = outer.w - 4;
+	inner.h = outer.h - 4;
+
+	fill = inner;
+	fill.w = inner.w * percent / 100;
+
+	SDL_FillRect(screen, &outer, white);
+	SDL_FillRect(screen, &inner, gray);
+
+	if (fill.w > 0)
+		SDL_FillRect(screen, &fill, white);
+
+	snprintf(percent_text, sizeof(percent_text), "%u%%", percent);
+
+	pitch = screen->pitch / sizeof(uint16_t);
+
+	/*
+	 * libpicofe's built-in font is 8 pixels wide.
+	 */
+	label_x = (screen->w - (int)strlen(label) * 8) / 2;
+	percent_x = (screen->w - (int)strlen(percent_text) * 8) / 2;
+
+	if (label_x < 0)
+		label_x = 0;
+
+	if (SDL_LockSurface(screen) == 0) {
+		basic_text_out16_nf(
+			screen->pixels,
+			pitch,
+			label_x,
+			outer.y - 18,
+			label
+		);
+
+		basic_text_out16_nf(
+			screen->pixels,
+			pitch,
+			percent_x,
+			outer.y + outer.h + 8,
+			percent_text
+		);
+
+		SDL_UnlockSurface(screen);
+	}
+
+	SDL_Flip(screen);
+}
+
+void plat_video_progress_clear(void)
+{
+	uint32_t black;
+
+	if (!screen)
+		return;
+
+	black = SDL_MapRGB(screen->format, 0, 0, 0);
+
+	SDL_FillRect(screen, NULL, black);
+	SDL_Flip(screen);
 }
 
 void plat_video_set_msg(const char *new_msg, unsigned priority, unsigned msec)

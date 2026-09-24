@@ -7,7 +7,7 @@ SYSROOT   = $(shell $(CC) --print-sysroot)
 
 PROCS     = -j4
 
-SOURCES   = libpicofe/input.c libpicofe/in_sdl.c libpicofe/linux/in_evdev.c libpicofe/linux/plat.c libpicofe/fonts.c libpicofe/readpng.c libpicofe/config_file.c cheat.c config.c content.c core.c menu.c main.c options.c overrides.c patch.c scale.c unzip.c util.c video.c
+SOURCES   = libpicofe/input.c libpicofe/in_sdl.c libpicofe/linux/in_evdev.c libpicofe/linux/plat.c libpicofe/fonts.c libpicofe/readpng.c libpicofe/config_file.c cheat.c config.c content.c content_cache.c core.c menu.c main.c options.c overrides.c patch.c scale.c unzip.c util.c video.c
 
 BIN       = picoarch
 

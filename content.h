@@ -7,7 +7,8 @@
 struct content {
 	const char path[MAX_PATH];
 
-	char *tmpfile;
+	char *file;
+	bool file_is_temporary;
 	void *data;
 	size_t size;
 };
