@@ -67,7 +67,7 @@ gambatte_REPO = https://github.com/libretro/gambatte-libretro
 gambatte_TYPES = gb,gbc,dmg,zip
 
 gngeo_REPO = https://github.com/coffeecore/gngeo-steward-fu.git
-gngeo_REVISION = 70f69b1f22400cab793f5acf0315f68dc5662902
+gngeo_REVISION = 245240c35aa60110ed7531e16f390eee0b8eb7ba
 gngeo_MAKEFILE = Makefile.libretro
 gngeo_TYPES = gno,zip
 gngeo_FLAGS = CROSS_COMPILE=$(CROSS_COMPILE) SYSROOT=$(SYSROOT) LIBRETRO_DIR=$(CURDIR)/libretro-common/include
