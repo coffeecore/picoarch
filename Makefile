@@ -22,7 +22,29 @@ LDFLAGS    = -lc -ldl -lgcc -lm -lSDL -lasound -lpng -lz -Wl,--gc-sections -flto
 # Unpolished or slow cores that build
 # EXTRA_CORES += mame2003_plus prboom scummvm tyrquake
 
-CORES = beetle-pce-fast bluemsx fceumm fmsx gambatte gngeo gme gpsp handy mame2000 mednafen_ngp mednafen_wswan pcsx_rearmed picodrive pokemini quicknes smsplus-gx snes9x2002 snes9x2005 stella2014 $(EXTRA_CORES)
+CORES = \
+	beetle-pce-fast \
+	bluemsx \
+	fceumm \
+	fmsx \
+	gambatte \
+	gngeo \
+	gme \
+	gpsp \
+	handy \
+	mame2000 \
+	mame2003 \
+	mednafen_ngp \
+	mednafen_wswan \
+	pcsx_rearmed \
+	picodrive \
+	pokemini \
+	quicknes \
+	smsplus-gx \
+	snes9x2002 \
+	snes9x2005 \
+	stella2014 \
+	$(EXTRA_CORES)
 
 ifneq ($(platform), trimui)
 CORES := $(CORES) dosbox-pure fake-08 fbalpha2012 snes9x2005_plus snes9x2010
