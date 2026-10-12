@@ -79,6 +79,7 @@ fbalpha2012_MAKEFILE = makefile.libretro
 fbalpha2012_TYPES = zip
 
 fceumm_REPO = https://github.com/libretro/libretro-fceumm
+fceumm_REVISION ?= b5e3566515c27dc66c9c20572171673126532e06
 fceumm_MAKEFILE = Makefile.libretro
 fceumm_TYPES = fds,nes,unf,unif
 
@@ -238,12 +239,22 @@ $1_BUILD_PATH ?= $(1)
 
 $1_MAKE = make $(and $($1_MAKEFILE),-f $($1_MAKEFILE)) platform=$(core_platform) $(and $(DEBUG),DEBUG=$(DEBUG)) $(and $(PROFILE),PROFILE=$(PROFILE)) CC=$(CC) CXX=$(CXX) $($(1)_FLAGS)
 
-$(1):
-	git clone $(if $($1_REVISION),,--depth 1) --recursive $$($(1)_REPO) $(1)
-	$(if $1_REVISION,cd $(1) && git checkout $($1_REVISION),)
-	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --merge --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
+$1_PATCHES := $(sort $(wildcard patches/$(1)/*.patch))
+$1_REVISION_KEY := $(if $($1_REVISION),$($1_REVISION),HEAD)
+$1_PREPARED := $(1)/.picoarch-prepared-$$($1_REVISION_KEY)
 
-$(1)/$(1)_libretro.so: $(1)
+$$($1_PREPARED): $$($1_PATCHES)
+	@if [ ! -d "$(1)/.git" ]; then \
+		git clone $(if $($1_REVISION),,--depth 1) --recursive $$($(1)_REPO) $(1); \
+	fi
+	cd $(1) && git reset --hard && git clean -fdx
+	$(if $($1_REVISION),cd $(1) && git fetch origin && git checkout --detach $($1_REVISION) && git reset --hard $($1_REVISION),)
+	cd $(1) && git submodule update --init --recursive
+	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --merge --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
+	rm -f $(1)/.picoarch-prepared-*
+	touch $$($1_PREPARED)
+
+$(1)/$(1)_libretro.so: $$($1_PREPARED)
 	cd $$($1_BUILD_PATH) && $$($1_MAKE) $(PROCS)
 
 $(1)_libretro.so: $(1)/$(1)_libretro.so
@@ -252,6 +263,7 @@ $(1)_libretro.so: $(1)/$(1)_libretro.so
 clean-$(1):
 	test ! -d $(1) || cd $$($1_BUILD_PATH) && $$($1_MAKE) clean
 	rm -f $(1)_libretro.so
+
 endef
 
 $(foreach core,$(CORES),$(eval $(call CORE_template,$(core))))
