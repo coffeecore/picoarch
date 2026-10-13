@@ -136,6 +136,7 @@ quicknes_TYPES = nes
 
 scummvm_TYPES = scummvm
 
+smsplus-gx_REVISION ?= 8a63f82d3c3bbf7215a31f86a4aaa13fb68a579f
 smsplus-gx_MAKEFILE = Makefile.libretro
 smsplus-gx_CORE = smsplus_libretro.so
 smsplus-gx_TYPES = sms,bin,rom,col,gg,sg
