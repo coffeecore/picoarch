@@ -158,6 +158,7 @@ snes9x2005_plus_TYPES = smc,fig,sfc,gd3,gd7,dx2,bsx,swc,zip
 snes9x2010_TYPES = smc,fig,sfc,gd3,gd7,dx2,bsx,swc,zip
 
 stella2014_REPO = https://github.com/libretro/stella2014-libretro
+stella2014_REVISION ?= 4a7da82595d27b8df7af1ecb467a64b642a41bc9
 stella2014_TYPES = a26,bin
 
 tyrquake_TYPES = pak
