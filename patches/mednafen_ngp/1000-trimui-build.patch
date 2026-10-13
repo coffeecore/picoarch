@@ -1,0 +1,26 @@
+diff --git a/Makefile b/Makefile
+index e400288..92cf9c2 100644
+--- a/Makefile
++++ b/Makefile
+@@ -164,7 +164,21 @@ else ifeq ($(platform), classic_armv8_a35)
+ 	ARCH = arm
+ 	LDFLAGS += -marm -mcpu=cortex-a35 -mfpu=neon-fp-armv8 -mfloat-abi=hard -Ofast -flto -fuse-linker-plugin
+ #######################################
++# Trimui Model S
++else ifeq ($(platform), trimui)
++   TARGET := $(TARGET_NAME)_libretro.so
++   CC = $(CROSS_COMPILE)gcc
++   CXX = $(CROSS_COMPILE)g++
++   AR = $(CROSS_COMPILE)ar
++   fpic :=
++   SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
++
++   FLAGS += -DARM
++   FLAGS += -fomit-frame-pointer -ffast-math
++   FLAGS += -mcpu=arm926ej-s -mtune=arm926ej-s
++   FLAGS += -fno-PIC -flto
+ 
++   LDFLAGS += -flto
+ # OS X
+ else ifeq ($(platform), osx)
+    TARGET := $(TARGET_NAME)_libretro.dylib

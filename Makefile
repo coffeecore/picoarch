@@ -114,6 +114,7 @@ mame2003_plus_REPO = https://github.com/libretro/mame2003-plus-libretro
 mame2003_plus_TYPES = zip
 
 mednafen_ngp_REPO = https://github.com/libretro/beetle-ngp-libretro
+mednafen_ngp_REVISION ?= a50d5ac288a81f2104ddf43195a4efdd15c72227
 mednafen_ngp_TYPES = ngp,ngc,ngpc,npc
 
 mednafen_wswan_REPO = https://github.com/libretro/beetle-wswan-libretro
