@@ -57,6 +57,7 @@ beetle-pce-fast_CORE = mednafen_pce_fast_libretro.so
 beetle-pce-fast_TYPES = pce,cue,ccd,chd,toc,m3u
 
 bluemsx_REPO = https://github.com/libretro/blueMSX-libretro
+bluemsx_REVISION ?= 0f32f52c48d3e772bfdf0379756f81f00b4e08bc
 bluemsx_TYPES = rom,ri,mx1,mx2,dsk,col,sg,sc,cas,m3u
 
 dosbox-pure_REPO = https://github.com/schellingb/dosbox-pure
