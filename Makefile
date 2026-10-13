@@ -106,7 +106,7 @@ gpsp_REVISION ?= 5b6e751f4abf368509146cd143c949c1946ac1ae
 gpsp_TYPES = gba,bin,zip
 
 handy_REPO = https://github.com/libretro/libretro-handy
-handy_REVISION = bc55d462f0b2d6b073ea93dc552ebd73cec60fd1
+handy_REVISION ?= bc55d462f0b2d6b073ea93dc552ebd73cec60fd1
 handy_TYPES = lnx,lyx,o
 
 mame2000_REPO = https://github.com/libretro/mame2000-libretro
