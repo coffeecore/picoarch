@@ -1,0 +1,21 @@
+diff --git a/pico/cd/libchdr/deps/lzma-24.05/src/CpuArch.c b/pico/cd/libchdr/deps/lzma-24.05/src/CpuArch.c
+--- a/pico/cd/libchdr/deps/lzma-24.05/src/CpuArch.c
++++ b/pico/cd/libchdr/deps/lzma-24.05/src/CpuArch.c
+@@ -829,6 +829,18 @@ static unsigned long MY_getauxval(int aux)
+ // MY_HWCAP_CHECK_FUNC (ASIMD)
+ #elif defined(MY_CPU_ARM)
++#ifndef HWCAP2_CRC32
++#define HWCAP2_CRC32 0
++#endif
++#ifndef HWCAP2_SHA1
++#define HWCAP2_SHA1 0
++#endif
++#ifndef HWCAP2_SHA2
++#define HWCAP2_SHA2 0
++#endif
++#ifndef HWCAP2_AES
++#define HWCAP2_AES 0
++#endif
+   #define MY_HWCAP_CHECK_FUNC(name) \
+   BoolInt CPU_IsSupported_ ## name(void) { return (MY_getauxval(AT_HWCAP2) & (HWCAP2_ ## name)); }
+   MY_HWCAP_CHECK_FUNC_2(NEON, NEON)

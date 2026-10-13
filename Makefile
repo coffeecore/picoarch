@@ -2,8 +2,11 @@
 platform   ?= unix
 core_platform ?= $(platform)
 
-CC        = $(CROSS_COMPILE)gcc
-CXX       = $(CROSS_COMPILE)g++
+CC = $(CROSS_COMPILE)gcc
+CXX = $(CROSS_COMPILE)g++
+
+CC_FOR_BUILD ?= gcc
+CXX_FOR_BUILD ?= g++
 SYSROOT   = $(shell $(CC) --print-sysroot)
 
 PROCS     = -j4
@@ -134,7 +137,13 @@ pcsx_rearmed_REVISION ?= da2cb8ecd17fd0932ab6d94774c0522beebce6e3
 pcsx_rearmed_MAKEFILE = Makefile.libretro
 pcsx_rearmed_TYPES = bin,cue,img,mdf,pbp,toc,cbn,m3u,chd
 
+picodrive_REPO = https://github.com/libretro/picodrive.git
+picodrive_REVISION ?= 6248b51ffbe212ce441de023ccea6b10fa4d7082
 picodrive_MAKEFILE = Makefile.libretro
+picodrive_FLAGS = \
+    CROSS_COMPILE=$(CROSS_COMPILE) \
+    CYCLONE_CC=$(CC_FOR_BUILD) \
+    CYCLONE_CXX=$(CXX_FOR_BUILD)
 picodrive_TYPES = bin,gen,smd,md,32x,cue,iso,chd,sms,gg,m3u,68k,sgd
 
 pokemini_REPO = https://github.com/libretro/PokeMini.git
@@ -273,7 +282,7 @@ $$($1_PREPARED): $$($1_PATCHES)
 	fi
 	cd $(1) && git reset --hard && git clean -fdx
 	$(if $($1_REVISION),cd $(1) && git fetch origin && git checkout --detach $($1_REVISION) && git reset --hard $($1_REVISION),)
-	cd $(1) && git submodule update --init --recursive
+	cd $(1) && git submodule foreach --recursive 'git reset --hard && git clean -fdx'
 	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
 	rm -f $(1)/.picoarch-prepared-*
 	touch $$($1_PREPARED)
