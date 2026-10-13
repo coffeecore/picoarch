@@ -1,0 +1,21 @@
+diff --git a/Makefile b/Makefile
+index 878e147..c3b4193 100644
+--- a/Makefile
++++ b/Makefile
+@@ -332,7 +332,15 @@ else ifeq ($(platform), miyoo)
+    fpic := -fPIC
+    SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
+    FLAGS += -fomit-frame-pointer -ffast-math -march=armv5te -mtune=arm926ej-s
+-
++# Trimui Model S
++else ifeq ($(platform), trimui)
++   TARGET := $(TARGET_NAME)_libretro.so
++   CC = $(CROSS_COMPILE)gcc
++   CXX = $(CROSS_COMPILE)g++
++   AR = $(CROSS_COMPILE)ar
++   fpic :=
++   SHARED := -shared -Wl,--no-undefined -Wl,--version-script=link.T
++   FLAGS += -fomit-frame-pointer -ffast-math -mcpu=arm926ej-s -mtune=arm926ej-s
+ # Windows MSVC 2017 all architectures
+ else ifneq (,$(findstring windows_msvc2017,$(platform)))
+ 

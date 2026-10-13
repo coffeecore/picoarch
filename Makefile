@@ -118,6 +118,7 @@ mednafen_ngp_REVISION ?= a50d5ac288a81f2104ddf43195a4efdd15c72227
 mednafen_ngp_TYPES = ngp,ngc,ngpc,npc
 
 mednafen_wswan_REPO = https://github.com/libretro/beetle-wswan-libretro
+mednafen_wswan_REVISION ?= 4b01295838ea89e3f1355bbe4cb5cf98aa6108cd
 mednafen_wswan_TYPES = ws,wsc,pc2
 
 pcsx_rearmed_MAKEFILE = Makefile.libretro
