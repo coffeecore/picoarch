@@ -131,6 +131,7 @@ prboom_REPO = https://github.com/libretro/libretro-prboom
 prboom_TYPES = wad,iwad,pwad,lmp
 
 quicknes_REPO = https://github.com/libretro/QuickNES_Core
+quicknes_REVISION ?= 26bb785c9deddb66a17717b21bb4e328f03ade32
 quicknes_TYPES = nes
 
 scummvm_TYPES = scummvm
