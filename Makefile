@@ -125,6 +125,8 @@ pcsx_rearmed_TYPES = bin,cue,img,mdf,pbp,toc,cbn,m3u,chd
 picodrive_MAKEFILE = Makefile.libretro
 picodrive_TYPES = bin,gen,smd,md,32x,cue,iso,chd,sms,gg,m3u,68k,sgd
 
+pokemini_REPO = https://github.com/libretro/PokeMini.git
+pokemini_REVISION ?= 132111b76343559860532a1ccc094f93f1ed5650
 pokemini_TYPES = min
 
 prboom_REPO = https://github.com/libretro/libretro-prboom

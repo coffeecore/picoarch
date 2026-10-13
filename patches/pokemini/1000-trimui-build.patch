@@ -1,0 +1,22 @@
+diff --git a/Makefile.libretro b/Makefile.libretro
+index 9660e99..c6401e8 100644
+--- a/Makefile.libretro
++++ b/Makefile.libretro
+@@ -483,7 +483,16 @@ else ifeq ($(platform), miyoo)
+ 	CFLAGS += $(PTHREAD_FLAGS)
+ 	CFLAGS += -ffast-math -fomit-frame-pointer -march=armv5te -mtune=arm926ej-s
+ 	CFLAGS += -DDINGUX -DRS90
+-
++# TRIMUI MODEL S
++else ifeq ($(platform), trimui)
++	TARGET := $(TARGET_NAME)_libretro.so
++	CC = $(CROSS_COMPILE)gcc
++	CXX = $(CROSS_COMPILE)g++
++	AR = $(CROSS_COMPILE)ar
++	SHARED := -shared -Wl,--version-script=libretro/link.T
++	fpic :=
++	CFLAGS += $(PTHREAD_FLAGS)
++	CFLAGS += -ffast-math -fomit-frame-pointer -mcpu=arm926ej-s -mtune=arm926ej-s
+ # GCW0
+ else ifeq ($(platform), gcw0)
+ 	TARGET := $(TARGET_NAME)_libretro.so
