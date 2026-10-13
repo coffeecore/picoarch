@@ -102,6 +102,7 @@ gngeo_FLAGS = CROSS_COMPILE=$(CROSS_COMPILE) SYSROOT=$(SYSROOT) LIBRETRO_DIR=$(C
 gme_REPO = https://github.com/libretro/libretro-gme
 gme_REVISION ?= 1562f6207a066e9807243c89648d1cb44e411971
 
+gpsp_REVISION ?= 5b6e751f4abf368509146cd143c949c1946ac1ae
 gpsp_TYPES = gba,bin,zip
 
 handy_REPO = https://github.com/libretro/libretro-handy
