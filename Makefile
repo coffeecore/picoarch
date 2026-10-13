@@ -87,6 +87,7 @@ fmsx_REPO = https://github.com/libretro/fmsx-libretro
 fmsx_TYPES = rom,mx1,mx2,dsk,cas
 
 gambatte_REPO = https://github.com/libretro/gambatte-libretro
+gambatte_REVISION ?= 96174369b3c30d9fc57c926fa3379c273dc6a9a5
 gambatte_TYPES = gb,gbc,dmg,zip
 
 gngeo_REPO = https://github.com/coffeecore/gngeo-steward-fu.git
@@ -250,7 +251,7 @@ $$($1_PREPARED): $$($1_PATCHES)
 	cd $(1) && git reset --hard && git clean -fdx
 	$(if $($1_REVISION),cd $(1) && git fetch origin && git checkout --detach $($1_REVISION) && git reset --hard $($1_REVISION),)
 	cd $(1) && git submodule update --init --recursive
-	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --merge --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
+	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
 	rm -f $(1)/.picoarch-prepared-*
 	touch $$($1_PREPARED)
 
