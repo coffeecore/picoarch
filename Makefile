@@ -141,6 +141,7 @@ smsplus-gx_MAKEFILE = Makefile.libretro
 smsplus-gx_CORE = smsplus_libretro.so
 smsplus-gx_TYPES = sms,bin,rom,col,gg,sg
 
+snes9x2002_REVISION ?= 5bd8bd6d449be8a2ef7909e1aeb2bd8c9c0da8cb
 snes9x2002_TYPES = smc,fig,sfc,gd3,gd7,dx2,bsx,swc,zip
 
 snes9x2005_REPO = https://git.crowdedwood.com/snes9x2005
