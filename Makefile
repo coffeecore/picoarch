@@ -99,6 +99,7 @@ gngeo_TYPES = gno,zip
 gngeo_FLAGS = CROSS_COMPILE=$(CROSS_COMPILE) SYSROOT=$(SYSROOT) LIBRETRO_DIR=$(CURDIR)/libretro-common/include
 
 gme_REPO = https://github.com/libretro/libretro-gme
+gme_REVISION ?= 1562f6207a066e9807243c89648d1cb44e411971
 
 gpsp_TYPES = gba,bin,zip
 
