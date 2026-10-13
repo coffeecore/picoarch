@@ -85,6 +85,7 @@ fceumm_MAKEFILE = Makefile.libretro
 fceumm_TYPES = fds,nes,unf,unif
 
 fmsx_REPO = https://github.com/libretro/fmsx-libretro
+fmsx_REVISION ?= f013e213458e06d9df718e4bc4b09d46f88aa899
 fmsx_TYPES = rom,mx1,mx2,dsk,cas
 
 gambatte_REPO = https://github.com/libretro/gambatte-libretro
