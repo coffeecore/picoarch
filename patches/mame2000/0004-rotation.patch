@@ -1,8 +1,8 @@
 diff --git a/src/libretro/libretro.c b/src/libretro/libretro.c
-index adb09c4..53fc5e2 100644
+index 37348a9..bb83307 100644
 --- a/src/libretro/libretro.c
 +++ b/src/libretro/libretro.c
-@@ -68,6 +68,8 @@ int should_skip_frame                    = 0;
+@@ -74,6 +74,8 @@ int should_skip_frame                    = 0;
  static int sample_rate                   = 22050;
  static int stereo_enabled                = true;
  
@@ -10,10 +10,10 @@ index adb09c4..53fc5e2 100644
 +
  int game_index = -1;
  unsigned short *gp2x_screen15;
- int thread_done = 0;
-@@ -296,6 +298,19 @@ static void update_variables(bool first_run)
-     else
-         stereo_enabled = true;
+ /* Software-framebuffer fast path: when the frontend grants us a buffer of
+@@ -413,6 +415,19 @@ static void update_variables(bool first_run)
+             qsound_output_filter_enabled = 0;
+     }
  
 +    var.value = NULL;
 +    var.key = "mame2000-rotate";
@@ -31,15 +31,7 @@ index adb09c4..53fc5e2 100644
     /* Reinitialise frameskipping, if required */
     if (!first_run &&
         ((frameskip_type     != prev_frameskip_type)))
-@@ -312,6 +327,7 @@ void retro_set_environment(retro_environment_t cb)
-       { "mame2000-show_gameinfo", "Show Game Information; disabled|enabled" },
-       { "mame2000-sample_rate", "Audio Rate (Restart); 22050|11025|22050|32000|44100" },
-       { "mame2000-stereo", "Stereo (Restart); enabled|disabled" },
-+      { "mame2000-rotate", "Rotate (Restart); disabled|enabled" },
-       { NULL, NULL },
-    };
-    environ_cb = cb;
-@@ -378,10 +394,17 @@ static void update_input(void)
+@@ -502,10 +517,17 @@ static void update_input(void)
  
  		key[KEY_1 + i]   |= JS(i, START);
  		key[KEY_5 + i]   |= JS(i, SELECT);
@@ -61,7 +53,7 @@ index adb09c4..53fc5e2 100644
  		joy_pressed[c++] = JS(i, B);
  		joy_pressed[c++] = JS(i, A);
  		joy_pressed[c++] = JS(i, Y);
-@@ -911,6 +934,11 @@ bool retro_load_game(const struct retro_game_info *info)
+@@ -1121,6 +1143,11 @@ bool retro_load_game(const struct retro_game_info *info)
     options.samplerate = sample_rate;
     usestereo = stereo_enabled;
  
@@ -73,3 +65,29 @@ index adb09c4..53fc5e2 100644
     /* This is needed so emulated YM3526/YM3812 chips are used instead on physical ones. */
     options.use_emulated_ym3812 = 1;
  
+diff --git a/src/libretro/libretro_core_options.h b/src/libretro/libretro_core_options.h
+index d215157..8f36eab 100644
+--- a/src/libretro/libretro_core_options.h
++++ b/src/libretro/libretro_core_options.h
+@@ -194,6 +194,21 @@ static struct retro_core_option_v2_definition option_defs_us[] = {
+       },
+       "enabled"
+    },
++   {
++      "mame2000-rotate",
++      "Rotate (Restart)",
++      NULL,
++      "Rotate the game display and controls by 90 degrees. "
++      "Changing this value requires a core restart.",
++      NULL,
++      NULL,
++      {
++         { "disabled", NULL },
++         { "enabled",  NULL },
++         { NULL, NULL },
++      },
++      "disabled"
++   },
+    {
+       "mame2000-qsound_output_filter",
+       "QSound Output Filter",

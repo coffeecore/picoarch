@@ -110,6 +110,7 @@ handy_REVISION ?= bc55d462f0b2d6b073ea93dc552ebd73cec60fd1
 handy_TYPES = lnx,lyx,o
 
 mame2000_REPO = https://github.com/libretro/mame2000-libretro
+mame2000_REVISION ?= f099ba44c7664906fd7e01cbed89d13a7e32dee1
 mame2000_TYPES = zip
 
 mame2003_plus_REPO = https://github.com/libretro/mame2003-plus-libretro
