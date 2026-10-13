@@ -53,6 +53,7 @@ endif
 # CORES = dosbox-pure
 
 beetle-pce-fast_REPO = https://github.com/libretro/beetle-pce-fast-libretro
+beetle-pce-fast_REVISION ?= b211204c7026dff6e86e79b00185512e2421fff8
 beetle-pce-fast_CORE = mednafen_pce_fast_libretro.so
 beetle-pce-fast_TYPES = pce,cue,ccd,chd,toc,m3u
 

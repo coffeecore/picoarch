@@ -1,7 +1,7 @@
-diff --git a/libretro.cpp b/libretro.cpp
+diff --git a/libretro.c b/libretro.c
 index 48fd03a..c0fe238 100644
---- a/libretro.cpp
-+++ b/libretro.cpp
+--- a/libretro.c
++++ b/libretro.c
 @@ -1627,13 +1627,11 @@ static uint64_t audio_frames = 0;
  static unsigned frameskip_type             = 0;
  static unsigned frameskip_threshold        = 0;
