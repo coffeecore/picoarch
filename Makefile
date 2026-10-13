@@ -144,8 +144,10 @@ smsplus-gx_TYPES = sms,bin,rom,col,gg,sg
 snes9x2002_REVISION ?= 5bd8bd6d449be8a2ef7909e1aeb2bd8c9c0da8cb
 snes9x2002_TYPES = smc,fig,sfc,gd3,gd7,dx2,bsx,swc,zip
 
-snes9x2005_REPO = https://git.crowdedwood.com/snes9x2005
-snes9x2005_REVISION = performance
+# snes9x2005_REPO = https://git.crowdedwood.com/snes9x2005
+# snes9x2005_REVISION = performance
+snes9x2005_REPO = https://github.com/libretro/snes9x2005.git
+snes9x2005_REVISION ?= deb49d80d1836e3e737480a326e31a54c46c04ae
 snes9x2005_TYPES = smc,fig,sfc,gd3,gd7,dx2,bsx,swc,zip
 
 snes9x2005_plus_REPO = https://git.crowdedwood.com/snes9x2005
