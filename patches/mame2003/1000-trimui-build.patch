@@ -1,0 +1,29 @@
+diff --git a/Makefile b/Makefile
+--- a/Makefile
++++ b/Makefile
+@@ -2955,5 +2955,25 @@
+ 	fpic := -fPIC -nostdlib
+ 	CFLAGS += -lm -march=mips32 -mtune=mips32 -mhard-float
+ 
++# Trimui Model S
++else ifeq ($(platform), trimui)
++	TARGET := $(TARGET_NAME)_libretro.so
++	CC = $(CROSS_COMPILE)gcc
++	CXX = $(CROSS_COMPILE)g++
++	AR = $(CROSS_COMPILE)ar
++
++	fpic := -fno-PIC
++
++	LDFLAGS += -shared -Wl,--version-script=link.T -Wl,-no-undefined
++
++	PLATCFLAGS := -DNO_UNALIGNED_ACCESS
++	PLATCFLAGS += -fomit-frame-pointer -march=armv5te -mtune=arm926ej-s -ffast-math
++
++	CXXFLAGS += -fno-rtti -fno-exceptions
++
++	ARM = 1
++	USE_CYCLONE := 1
++	USE_DRZ80 := 1
++
+ # MIYOO
+ else ifeq ($(platform), miyoo)

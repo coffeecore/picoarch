@@ -113,6 +113,11 @@ mame2000_REPO = https://github.com/libretro/mame2000-libretro
 mame2000_REVISION ?= f099ba44c7664906fd7e01cbed89d13a7e32dee1
 mame2000_TYPES = zip
 
+mame2003_REPO = https://github.com/libretro/mame2003-libretro.git
+mame2003_REVISION ?= 259339e92d5f63e4b293ce0d42a069f9e8ba2a6a
+mame2003_TYPES = zip
+mame2003_FLAGS = CROSS_COMPILE=$(CROSS_COMPILE)
+
 mame2003_plus_REPO = https://github.com/libretro/mame2003-plus-libretro
 mame2003_plus_TYPES = zip
 
