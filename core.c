@@ -351,6 +351,10 @@ finish:
 
 static void set_directories(const char *core_name) {
 	const char *home = getenv("HOME");
+#ifdef MINUI
+        const char *save_root = getenv("PICOARCH_SAVE_ROOT");
+        const char *system_root = getenv("PICOARCH_SYSTEM_ROOT");
+#endif
 	char *dst = save_dir;
 	int len = MAX_PATH;
 #ifndef MINUI
@@ -369,15 +373,30 @@ static void set_directories(const char *core_name) {
 	 * System dir: ~/.picoarch/system
 	 *
 	 * MinUI:
-	 * Save / config dir: ~/.picoarch-gambatte
-	 * System dir: ~/.picoarch-gambatte
+	 * Config dir: $HOME/<core>
+	 * Save dir: $PICOARCH_SAVE_ROOT/<core>
+	 * System dir: $PICOARCH_SYSTEM_ROOT/<core>
 	 */
 	if (home != NULL) {
 		snprintf(dst, len, "%s/%s/", home, core_name);
 #ifdef MINUI
 		mkdir(dst, 0755);
-		strncpy(config_dir, save_dir, MAX_PATH-1);
-		strncpy(system_dir, save_dir, MAX_PATH-1);
+
+		snprintf(config_dir, MAX_PATH, "%s", save_dir);
+
+		if (save_root != NULL) {
+			mkdir(save_root, 0755);
+			snprintf(save_dir, MAX_PATH, "%s/%s/", save_root, core_name);
+			mkdir(save_dir, 0755);
+		}
+
+		if (system_root != NULL) {
+			mkdir(system_root, 0755);
+			snprintf(system_dir, MAX_PATH, "%s/%s/", system_root, core_name);
+			mkdir(system_dir, 0755);
+		} else {
+			snprintf(system_dir, MAX_PATH, "%s", config_dir);
+		}
 #else
 		snprintf(picoarch_root, MAX_PATH, "%s/.picoarch", home);
 		mkdir(picoarch_root, 0755);
