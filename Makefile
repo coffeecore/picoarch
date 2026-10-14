@@ -282,6 +282,7 @@ $$($1_PREPARED): $$($1_PATCHES)
 	fi
 	cd $(1) && git reset --hard && git clean -fdx
 	$(if $($1_REVISION),cd $(1) && git fetch origin && git checkout --detach $($1_REVISION) && git reset --hard $($1_REVISION),)
+	cd $(1) && git submodule update --init --recursive
 	cd $(1) && git submodule foreach --recursive 'git reset --hard && git clean -fdx'
 	(test ! -d patches/$(1)) || (cd $(1) && $(foreach patch, $(sort $(wildcard patches/$(1)/*.patch)), patch --no-backup-if-mismatch -p1 < ../$(patch) &&) true)
 	rm -f $(1)/.picoarch-prepared-*
