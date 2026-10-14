@@ -373,7 +373,7 @@ static void set_directories(const char *core_name) {
 	 * System dir: ~/.picoarch-gambatte
 	 */
 	if (home != NULL) {
-		snprintf(dst, len, "%s/.picoarch-%s/", home, core_name);
+		snprintf(dst, len, "%s/%s/", home, core_name);
 #ifdef MINUI
 		mkdir(dst, 0755);
 		strncpy(config_dir, save_dir, MAX_PATH-1);
