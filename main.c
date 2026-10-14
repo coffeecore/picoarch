@@ -451,6 +451,13 @@ static void perform_emu_action(void) {
 		/* Force the hud to clear */
 		plat_video_set_msg(NULL, 0, 0);
 		break;
+        case EACTION_TOGGLE_FPS:
+                show_fps = !show_fps;
+                if (show_fps)
+                        show_hud = 1;
+                /* Force the hud to clear */
+                plat_video_set_msg(NULL, 0, 0);
+                break;
 	case EACTION_SAVE_STATE:
 		state_write();
 		break;
