@@ -392,7 +392,6 @@ static void set_directories(const char *core_name) {
 			snprintf(dst, len, "%s/data/%s/", picoarch_root, core_name);
 			mkdir(dst, 0755);
 		}
-	}
 
 	strncpy(config_dir, save_dir, MAX_PATH-1);
 
@@ -409,6 +408,7 @@ static void set_directories(const char *core_name) {
 		PA_FATAL("Can't find system directory\n");
 	}
 #endif  /* MINUI */
+	}
 	PA_INFO("Config dir: %s\n", config_dir);
 	PA_INFO("Save dir: %s\n", save_dir);
 	PA_INFO("System dir: %s\n", system_dir);
