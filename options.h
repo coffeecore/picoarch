@@ -3,6 +3,13 @@
 #include "libretro.h"
 #include "scale.h"
 
+enum fast_forward_speed {
+	FAST_FORWARD_SPEED_2X = 0,
+	FAST_FORWARD_SPEED_3X,
+	FAST_FORWARD_SPEED_4X,
+	FAST_FORWARD_SPEED_UNLIMITED,
+};
+
 extern int show_fps;
 extern int show_cpu;
 extern int show_hud;
@@ -13,6 +20,7 @@ extern int use_srm;
 extern unsigned audio_buffer_size;
 extern enum scale_size scale_size;
 extern enum scale_filter scale_filter;
+extern enum fast_forward_speed fast_forward_speed;
 
 struct core_option_entry {
 	char *key;

@@ -40,7 +40,27 @@ static emu_action eaction = EACTION_NONE;
 static uint32_t vsyncs;
 static uint32_t renders;
 
+static int fast_forward;
+
 #define UNDERRUN_THRESHOLD 50
+
+static unsigned fast_forward_multiplier(void)
+{
+	switch (fast_forward_speed) {
+	case FAST_FORWARD_SPEED_3X:
+		return 3;
+
+	case FAST_FORWARD_SPEED_4X:
+		return 4;
+
+	case FAST_FORWARD_SPEED_UNLIMITED:
+		return 0;
+
+	case FAST_FORWARD_SPEED_2X:
+	default:
+		return 2;
+	}
+}
 
 static void toggle_fast_forward(int force_off)
 {
@@ -48,7 +68,6 @@ static void toggle_fast_forward(int force_off)
 	static int max_frameskip_was;
 	static int limit_frames_was;
 	static int enable_audio_was;
-	static int fast_forward;
 	const struct core_override *override = get_overrides();
 
 	if (force_off && !fast_forward)
@@ -214,6 +233,7 @@ void set_defaults(void)
 	audio_buffer_size = 5;
 	scale_size = SCALE_SIZE_ASPECT;
 	scale_filter = SCALE_FILTER_NEAREST;
+	fast_forward_speed = FAST_FORWARD_SPEED_2X;
 
 	/* Sets better defaults for small screen */
 	if (SCREEN_WIDTH == 240) {
@@ -715,6 +735,11 @@ int main(int argc, char **argv) {
 	do {
 		count_fps();
 		adjust_audio();
+
+		plat_fast_forward_limit(
+			fast_forward ? fast_forward_multiplier() : 0
+		);
+
 		core_run_frame();
 		perform_emu_action();
 #ifdef FUNKEY_S

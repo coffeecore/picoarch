@@ -53,6 +53,42 @@ static uint64_t plat_get_ticks_us_u64(void) {
 	return ret;
 }
 
+void plat_fast_forward_limit(unsigned multiplier)
+{
+	static uint64_t next_frame_time_us = 0;
+
+	if (multiplier == 0) {
+		next_frame_time_us = 0;
+		return;
+	}
+
+	uint64_t fast_frame_time_us = frame_time / multiplier;
+	if (fast_frame_time_us == 0) {
+		next_frame_time_us = 0;
+		return;
+	}
+
+	uint64_t now = plat_get_ticks_us_u64();
+
+	if (next_frame_time_us == 0) {
+		next_frame_time_us = now;
+		return;
+	}
+
+	next_frame_time_us += fast_frame_time_us;
+
+	if (now < next_frame_time_us) {
+		usleep(next_frame_time_us - now);
+	}
+	else if (now - next_frame_time_us > fast_frame_time_us) {
+		/*
+		 * We fell more than one fast-forward frame behind.
+		 * Reset the deadline instead of trying to catch up in a burst.
+		 */
+		next_frame_time_us = now;
+	}
+}
+
 static void video_expire_msg(void)
 {
 	msg[0] = '\0';

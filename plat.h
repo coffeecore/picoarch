@@ -23,6 +23,7 @@ void plat_video_progress(const char *label, unsigned percent);
 void plat_video_progress_clear(void);
 void plat_video_process(const void *data, unsigned width, unsigned height, size_t pitch);
 void plat_video_flip(void);
+void plat_fast_forward_limit(unsigned multiplier);
 void plat_video_close(void);
 
 unsigned plat_cpu_ticks(void);

@@ -17,6 +17,7 @@ int use_srm;
 unsigned audio_buffer_size;
 enum scale_size scale_size;
 enum scale_filter scale_filter;
+enum fast_forward_speed fast_forward_speed;
 
 struct core_options core_options;
 

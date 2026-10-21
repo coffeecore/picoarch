@@ -30,6 +30,7 @@ static const struct {
 	CE_NUM(audio_buffer_size),
 	CE_NUM(scale_size),
 	CE_NUM(scale_filter),
+	CE_NUM(fast_forward_speed),
 };
 
 void config_write(FILE *f)

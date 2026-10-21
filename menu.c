@@ -578,12 +578,25 @@ static const char *men_scale_size[] = { "Native", "Aspect", "Full", "Crop", NULL
 
 static const char *men_scale_filter[] = { "Nearest", "Sharp", "Smooth", NULL};
 
+static const char h_fast_forward_speed[] =
+	"Limits fast-forward speed. Unlimited runs as fast\n"
+	"as the emulator and hardware allow.";
+
+static const char *men_fast_forward_speed[] = {
+	"2x",
+	"3x",
+	"4x",
+	"Unlimited",
+	NULL
+};
+
 static menu_entry e_menu_video_options[] =
 {
 	mee_onoff_h      ("Show FPS",                 0, show_fps, 1, h_show_fps),
 	mee_onoff_h      ("Show CPU %%",              0, show_cpu, 1, h_show_cpu),
 	mee_enum_h       ("Screen size",              0, scale_size, men_scale_size, h_scale_size),
 	mee_enum_h       ("Filter",                   0, scale_filter, men_scale_filter, h_scale_filter),
+	mee_enum_h       ("Fast-forward",             0, fast_forward_speed, men_fast_forward_speed, h_fast_forward_speed),
 	mee_range_h      ("Audio buffer",             0, audio_buffer_size, 1, 15, h_audio_buffer_size),
 	mee_onoff_h      ("Audio adjustment",         0, enable_drc, 1, h_enable_drc),
 	mee_end,
