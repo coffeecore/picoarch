@@ -80,14 +80,19 @@ static void toggle_fast_forward(int force_off)
 			const char *type_key = override->fast_forward->type_key;
 			const char *interval_key = override->fast_forward->interval_key;
 
-			frameskip_style_was = options_get_value_index(type_key);
-			max_frameskip_was = options_get_value_index(interval_key);
-			options_set_value(
-				type_key,
-				CORE_OVERRIDE(override->fast_forward, type_value, "fixed_interval"));
-			options_set_value(
-				interval_key,
-				CORE_OVERRIDE(override->fast_forward, interval_value, "5"));
+			if (type_key) {
+				frameskip_style_was = options_get_value_index(type_key);
+				options_set_value(
+					type_key,
+					CORE_OVERRIDE(override->fast_forward, type_value, "fixed_interval"));
+			}
+
+			if (interval_key) {
+				max_frameskip_was = options_get_value_index(interval_key);
+				options_set_value(
+					interval_key,
+					CORE_OVERRIDE(override->fast_forward, interval_value, "5"));
+			}
 		}
 
 		limit_frames_was = limit_frames;
@@ -99,8 +104,13 @@ static void toggle_fast_forward(int force_off)
 			const char *type_key = override->fast_forward->type_key;
 			const char *interval_key = override->fast_forward->interval_key;
 
-			options_set_value_index(type_key, frameskip_style_was);
-			options_set_value_index(interval_key, max_frameskip_was);
+			if (type_key) {
+				options_set_value_index(type_key, frameskip_style_was);
+			}
+
+			if (interval_key) {
+				options_set_value_index(interval_key, max_frameskip_was);
+			}
 		}
 
 		limit_frames = limit_frames_was;
