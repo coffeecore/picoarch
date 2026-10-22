@@ -242,7 +242,7 @@ void set_defaults(void)
 	use_srm = 1;
 	audio_buffer_size = 5;
 	scale_size = SCALE_SIZE_ASPECT;
-	scale_filter = SCALE_FILTER_NEAREST;
+	scale_filter = SCALE_FILTER_SHARP;
 	fast_forward_speed = FAST_FORWARD_SPEED_2X;
 
 	/* Sets better defaults for small screen */
