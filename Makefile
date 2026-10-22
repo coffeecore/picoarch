@@ -305,6 +305,9 @@ $(foreach core,$(CORES),$(eval $(call CORE_template,$(core))))
 .PHONY: cores
 cores: $(SOFILES)
 
+.PHONY: clean-cores
+clean-cores: $(foreach core,$(CORES),clean-$(core))
+
 .PHONY: clean-picoarch
 clean-picoarch:
 	rm -f $(DEPS) $(OBJS) $(BIN)
@@ -316,7 +319,7 @@ clean: clean-libpicofe clean-picoarch
 	rm -f $(SOFILES)
 
 .PHONY: clean-all
-clean-all: $(foreach core,$(CORES),clean-$(core)) clean
+clean-all: clean-cores clean
 
 .PHONY: distclean
 distclean: clean
