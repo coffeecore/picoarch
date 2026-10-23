@@ -75,6 +75,7 @@ me_bind_action emuctrl_actions[] =
 	{ "Save State       ", 1 << EACTION_SAVE_STATE },
 	{ "Load State       ", 1 << EACTION_LOAD_STATE },
 	{ "Toggle FPS/CPU%  ", 1 << EACTION_TOGGLE_HUD },
+	{ "Toggle FPS       ", 1 << EACTION_TOGGLE_FPS },
 	{ "Toggle FF        ", 1 << EACTION_TOGGLE_FF },
 	{ "Take Screenshot  ", 1 << EACTION_SCREENSHOT },
 	{ NULL,                0 }
@@ -605,9 +606,19 @@ static menu_entry e_menu_video_options[] =
 static int menu_loop_video_options(int id, int keys)
 {
 	static int sel = 0;
+	int old_scale_size = scale_size;
+	int old_scale_filter = scale_filter;
+	int old_audio_buffer_size = audio_buffer_size;
+	int old_enable_drc = enable_drc;
 
 	me_loop(e_menu_video_options, &sel);
-	plat_reinit();
+
+	if (scale_size != old_scale_size ||
+	    scale_filter != old_scale_filter ||
+	    audio_buffer_size != old_audio_buffer_size ||
+	    enable_drc != old_enable_drc) {
+		plat_reinit();
+	}
 
 	return 0;
 }
