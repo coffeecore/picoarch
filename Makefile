@@ -9,7 +9,8 @@ CC_FOR_BUILD ?= gcc
 CXX_FOR_BUILD ?= g++
 SYSROOT   = $(shell $(CC) --print-sysroot)
 
-PROCS     = -j4
+JOBS ?= 4
+PROCS = -j$(JOBS)
 
 SOURCES   = libpicofe/input.c libpicofe/in_sdl.c libpicofe/linux/in_evdev.c libpicofe/linux/plat.c libpicofe/fonts.c libpicofe/readpng.c libpicofe/config_file.c cheat.c config.c content.c content_cache.c core.c menu.c main.c options.c overrides.c patch.c scale.c unzip.c util.c video.c
 
@@ -149,6 +150,11 @@ picodrive_TYPES = bin,gen,smd,md,32x,cue,iso,chd,sms,gg,m3u,68k,sgd
 pokemini_REPO = https://github.com/libretro/PokeMini.git
 pokemini_REVISION ?= 132111b76343559860532a1ccc094f93f1ed5650
 pokemini_TYPES = min
+
+prosystem_REPO = https://github.com/libretro/prosystem-libretro.git
+prosystem_REVISION ?= 8a88014287c7a01cd568067e5a557d0a2b2a051f
+prosystem_TYPES = a78,bin,cdf
+prosystem_FLAGS = platform=miyoo
 
 prboom_REPO = https://github.com/libretro/libretro-prboom
 prboom_TYPES = wad,iwad,pwad,lmp
