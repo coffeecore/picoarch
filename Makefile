@@ -98,7 +98,7 @@ gambatte_REVISION ?= 96174369b3c30d9fc57c926fa3379c273dc6a9a5
 gambatte_TYPES = gb,gbc,dmg,zip
 
 gngeo_REPO = https://github.com/coffeecore/gngeo-steward-fu.git
-gngeo_REVISION = b445502a3905b829a7a22d3fb16d52d8ee67722d
+gngeo_REVISION = ed7f50ba168a8ad0dc978f2818cc0b6c7fd5c7a3
 gngeo_MAKEFILE = Makefile.libretro
 gngeo_TYPES = gno,zip
 gngeo_FLAGS = CROSS_COMPILE=$(CROSS_COMPILE) SYSROOT=$(SYSROOT) LIBRETRO_DIR=$(CURDIR)/libretro-common/include
